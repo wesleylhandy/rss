@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CBN.com/tv Image Feed</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
+    <script src="js/fetch.js"></script>
+<style>
+    html {
+        box-sizing: border-box;
+        background: #333;
+        min-height: 100vw;
+        height: 100%;
+    }
+
+    body {
+        background: #333;
+        min-height: 100vw;
+        height: 100%;
+    }
+    h1 {
+        margin: 30px auto;
+        text-align: center;
+        color: #f7f7f7;
+        text-shadow: inset 0 0 5px #f3f3f3, 0 0 10px #fcfcfc;
+
+    }
+    .container {
+        background: #f1f1f1;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .grid-container {
+        display: grid;
+        padding: 10px;
+        border: 1px solid #7f7f7f;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        grid-gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        margin: 0 auto;
+    }
+
+    .image-container {
+        outline: 5px solid transparent;
+        border: 1px solid #aeaeae;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        height: 200px;
+    }
+
+    .image-container img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .image-caption {
+        text-align: center;
+        width: 90%;
+        margin: 10px auto;
+    }
+</style>
+</head>
+<body>
+    <h1>CBN.com/TV Thumbnail Image Viewer</h1>
+    <div class="container">
+        <div class="grid-container">
+            <div class='image-container'>
+                <img src="" alt="">
+                <div class="image-caption"></div>
+            </div>
+            <div class='image-container'>
+                <img src="" alt="">
+                <div class="image-caption"></div>
+            </div>
+            <div class='image-container'>
+                <img src="" alt="">
+                <div class="image-caption"></div>
+            </div>
+            <div class='image-container'>
+                <img src="" alt="">
+                <div class="image-caption"></div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function getThumbnails() {
+            fetch('https://services.cbn.com/Feeds/Video/Featured.aspx?p=1&r=40')
+            .then(function(response){return response.text()})
+            .then(function(text){
+                var dom_parser = new DOMParser();
+                var parsed = dom_parser.parseFromString(text);
+                console.log({parsed})
+            })
+            .catch(function(err){
+                console.error({Error: err.message})
+            });
+        }
+    </script>
+
+</body>
+</html>
